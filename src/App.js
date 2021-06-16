@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MovieList from "./components/MovieList";
 
 const App = () => {
-  const [movies, setMovies] = useState([
+  const [movies] = useState([
     {
       Title: "Star Wars: Episode IV - A New Hope",
       Year: "1977",

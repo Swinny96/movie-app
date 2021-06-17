@@ -13,30 +13,15 @@ const App = () => {
 	const [searchValue, setSearchValue] = useState('');
 
 	const getMovieRequest = async (searchValue) => {
-		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=adc110ca`;
-
+		const url = `http://www.omdbapi.com/?s=${searchValue}&type=Movie&apikey=adc110ca`;
 		const response = await fetch(url);
 		const responseJson = await response.json();
 
 		if (responseJson.Search) {
 			setMovies(responseJson.Search);
 		}
-	};
-
-	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
-
-	useEffect(() => {
-		const movieFavourites = JSON.parse(
-			localStorage.getItem('react-movie-app-favourites')
-		);
-
-		if (movieFavourites) {
-			setFavourites(movieFavourites);
-		}
-	}, []);
-
+	};	
+  
 	const saveToLocalStorage = (items) => {
 		localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
 	};
@@ -55,6 +40,20 @@ const App = () => {
 		setFavourites(newFavouriteList);
 		saveToLocalStorage(newFavouriteList);
 	};
+
+	useEffect(() => {
+		getMovieRequest(searchValue);
+	}, [searchValue]);
+
+	useEffect(() => {
+		const movieFavourites = JSON.parse(
+			localStorage.getItem('react-movie-app-favourites')
+		);
+
+		if (movieFavourites) {
+			setFavourites(movieFavourites);
+		}
+	}, []);
 
 	return (
 		<div className='container-fluid movie-app'>
